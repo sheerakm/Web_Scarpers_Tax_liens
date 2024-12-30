@@ -52,10 +52,49 @@ def fetch_data_for_county(BASE_URL):
 def main():
     all_data = {}
     for i in range(1, 2):  # Adjust range as needed
-        BASE_URL = f"https://www.revenue.alabama.gov/property-tax/delinquent-search/?ador-delinquent-county={i:02}&_ador-delinquent-county-submit=submit"
-        print(f"Fetching data for URL: {BASE_URL}")
-        county_data = fetch_data_for_county(BASE_URL)
-        all_data[BASE_URL] = county_data
+
+
+        try:
+            BASE_URL = f"https://www.revenue.alabama.gov/property-tax/delinquent-search/?ador-delinquent-county={i:02}&_ador-delinquent-county-submit=submit"
+            print(f"Fetching data for URL: {BASE_URL}")
+
+            county_data = fetch_data_for_county(BASE_URL)
+            all_data[BASE_URL] = county_data
+            next_page = True
+
+            while (next_page):
+
+                try:
+
+                    # Find the "Next →" link element using its XPath or CSS selector
+                    next_link = driver.find_element(By.XPATH, '//a[contains(text(), "Next →")]')
+
+                    # Click on the "Next →" link
+                    next_link.click()
+
+                    # Wait for the new page to load (implicit or explicit wait might be necessary depending on your use case)
+
+                    # Get the current URL of the new page
+                    BASE_URL = driver.current_url
+                    county_data = fetch_data_for_county(BASE_URL)
+
+                    all_data[i]['data'].extend(county_data['data'])
+
+                    print(f"The new page URL is: {BASE_URL}")
+
+
+                except :
+                    next_page = False
+                    print("Element does not exist.")
+
+
+        finally:
+            # Close the browser
+            driver.quit()
+
+
+
+
 
     # Output as JSON
     with open("output.json", "w") as f:
