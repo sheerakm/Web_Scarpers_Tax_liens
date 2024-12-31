@@ -1,5 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
+import pandas as pd
 
 # Initialize Firebase
 cred = credentials.Certificate("../../private_keys_to_be_ignored/beta-test-40bcf-firebase-adminsdk-c86jz-4448da56cd.json")
@@ -20,7 +21,7 @@ db = firestore.client()
 # docs = doc_ref.collection('miami_dade').stream()
 
 
-import pandas as pd
+
 
 # Read the Excel file
 file_path = "Miami Dade County - ViewPurchase Certificates.xlsx"
