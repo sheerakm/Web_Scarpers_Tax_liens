@@ -1,8 +1,12 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+
 import json
 import time
+
+from selenium.webdriver.support.wait import WebDriverWait
 
 # Path to the extracted chromedriver executable
 driver_path = "D:\\chromedriver-win64\\chromedriver.exe"
@@ -67,7 +71,9 @@ def main():
                 try:
 
                     # Find the "Next →" link element using its XPath or CSS selector
-                    next_link = driver.find_element(By.XPATH, '//a[contains(text(), "Next →")]')
+                    next_link = WebDriverWait(driver, 10).until(
+                        EC.presence_of_element_located((By.XPATH, '//a[contains(text(), "Next →")]'))
+                    )
 
                     # Click on the "Next →" link
                     next_link.click()
@@ -90,7 +96,7 @@ def main():
 
         finally:
             # Close the browser
-            driver.quit()
+            print(f"done with index {i}")
 
 
 
@@ -103,6 +109,10 @@ def main():
     print("Data saved to output.json")
 
 if __name__ == "__main__":
+    next_link = driver.find_element(By.XPATH, '//a[contains(text(), "Next →")]')
+    print(next_link)
+
+    exit()
     try:
         main()
     finally:
