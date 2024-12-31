@@ -8,4 +8,4 @@ technoloties used:
 -opencv
 -firebase
 -pandas 
-- ...
+
