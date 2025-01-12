@@ -18,7 +18,8 @@ url = "https://taxsales.lgbs.com/map?lat=31.3198574459354&lon=-100.0768424999999
 driver.get(url)
 
 # Wait for the page to load
-time.sleep(5)
+time.sleep(5) # wait = WebDriverWait(driver, 10) agreement page not showing up, so causes problem
+
 
 try:
     # Find the "I Agree" button by its text
@@ -55,8 +56,8 @@ def extract_details():
 
     data.append(details)
 
-# Loop through search results (you may need to find a way to identify all the results)
-# and click 'More Details' for each of them
+# # Loop through search results (you may need to find a way to identify all the results)
+# # and click 'More Details' for each of them
 while True:
     # Find all result elements that have a "More Details" button
     results = driver.find_elements(By.XPATH, "//div[@class='result-class']")  # Modify the class
@@ -74,9 +75,27 @@ while True:
     else:
         break  # Exit loop if no more pages
 
-# Convert the collected data into a pandas DataFrame and save it to a CSV
-df = pd.DataFrame(data)
-df.to_csv("tax_sale_details.csv", index=False)
+# # Convert the collected data into a pandas DataFrame and save it to a CSV
+# df = pd.DataFrame(data)
+# df.to_csv("tax_sale_details.csv", index=False)
+#
+# # Close the driver
+# driver.quit()
 
-# Close the driver
-driver.quit()
+
+
+# for pagination, it works, and should add later, now lets get data for the first page.
+# element = driver.find_element(By.XPATH, "//a[contains(text(), 'Next')]")
+#
+#     # Check if the element is displayed and enabled
+# while ( element.is_displayed() and element.is_enabled()):
+#     time.sleep(0.4)
+#     element.click()
+#
+# time.sleep(10)
+#
+
+
+
+
+
