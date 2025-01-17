@@ -8,26 +8,21 @@ import time
 import pandas as pd
 from selenium.webdriver.support.wait import WebDriverWait
 
-# Set up WebDriver (for Chrome in this case)
 driver_path = "D:\\chromedriver-win64\\chromedriver.exe"
 service = Service(driver_path)
 
-# Initialize the Selenium WebDriver
 driver = webdriver.Chrome(service=service)
 
 wait = WebDriverWait(driver, 10)
 
 
-# Open the URL
 url = "https://taxsales.lgbs.com/map?lat=31.3198574459354&lon=-100.07684249999998&zoom=6&offset=0&ordering=precinct,sale_nbr,uid&sale_type=SALE,RESALE,STRUCK%20OFF,FUTURE%20SALE&in_bbox=-111.22796554687498,23.43704307977609,-88.92571945312498,38.5945502122854"
 driver.get(url)
 
-# Wait for the page to load
 time.sleep(5) # wait = WebDriverWait(driver, 10) agreement page not showing up, so causes problem
 
 
 try:
-    # Find the "I Agree" button by its text
     agree_button = driver.find_element(By.XPATH, '//button[text()="I Agree"]')
     agree_button.click()
     print("Clicked the Agree button successfully!")
@@ -35,23 +30,24 @@ try:
 except Exception as e:
     print("Failed to click the button:", e)
 
-# Optionally, wait for a bit or do other actions before closing
 time.sleep(5)
 
-# Placeholder for data storage
 data = []
 
 
 
 def find_results_per_page():
     try:
-        # Locate the result body
         result_body = driver.find_element(By.CLASS_NAME, "result-body")
 
-        # Find all property elements
-        property_elements = result_body.find_elements(By.CLASS_NAME, "result")
 
-        # Iterate through each property
+        property_elements = driver.find_elements(By.TAG_NAME, "property-listing")
+
+        print(property_elements)
+        print(len(property_elements), "length is ")
+
+
+
         for index, property_element in enumerate(property_elements):
             try:
                 # Scroll to the element
@@ -69,16 +65,13 @@ def find_results_per_page():
                 )
 
                 # Extract key-value pairs
-                details = details_section.find_elements(By.TAG_NAME, "li")
-                details_dict = {}
-                for detail in details:
-                    key = detail.find_element(By.TAG_NAME, "label").text.strip()
-                    value = detail.text.replace(key, "").strip()
-                    details_dict[key] = value
+                address = driver.find_element(By.CLASS_NAME, "ng-binding")
 
-                # Print or save the extracted data
-                print(f"Property {index + 1}:")
-                print(details_dict)
+                print(address.text, "address is ")
+
+                exit()
+
+
 
                 # Close the details section if necessary
                 close_button = driver.find_element(By.CLASS_NAME, "close-button-class")  # Replace with actual class
@@ -89,19 +82,14 @@ def find_results_per_page():
                 continue
 
     finally:
-        # Quit the driver
         driver.quit()
 
-# Function to extract the details for each item
 def extract_details():
-    # You can adjust these selectors based on the actual HTML structure
     details_button = driver.find_element(By.XPATH, "//button[contains(text(), 'More Details')]")
     details_button.click()
 
-    time.sleep(2)  # Wait for the detail info to load
+    time.sleep(2)
 
-    # Now you can extract the detailed information for each record
-    # Example: Extract some details (adjust based on actual page structure)
     detail_elements = driver.find_elements(By.XPATH, "//div[@class='detail-class']")  # Modify the class
 
     details = {}
@@ -112,8 +100,11 @@ def extract_details():
 
     data.append(details)
 
-# # Loop through search results (you may need to find a way to identify all the results)
-# # and click 'More Details' for each of them
+
+find_results_per_page()
+exit()
+
+
 while True:
     # Find all result elements that have a "More Details" button
     results = driver.find_elements(By.XPATH, "//div[@class='result-class']")  # Modify the class
