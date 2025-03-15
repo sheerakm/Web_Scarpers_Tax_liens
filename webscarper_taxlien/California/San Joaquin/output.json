@@ -1,0 +1,515 @@
+[
+    {
+        "Item Number": 1.0,
+        "Assessor's Parcel Number": "001-050-070-000",
+        "Default Number": "DEF180000005",
+        "Assessee": "SILVERDALE FARMS",
+        "Situs": "12500 W WALNUT GROVE RD  THORNTON (Unincorporated)",
+        "Minimum Bid": "$358,500.00",
+        "Comments": "See CDD Memo; Redeemed 12/27/2024"
+    },
+    {
+        "Item Number": 2.0,
+        "Assessor's Parcel Number": "005-150-360-000",
+        "Default Number": "DEF190000018",
+        "Assessee": "MALDONADO, BULMARO",
+        "Situs": "4010 E EMERSON RD  ACAMPO (Unincorporated)",
+        "Minimum Bid": "$1,500.00",
+        "Comments": "Removed 10/08/2024"
+    },
+    {
+        "Item Number": 3.0,
+        "Assessor's Parcel Number": "031-080-480-000",
+        "Default Number": "DEF170000159",
+        "Assessee": "BARRIGA, DANIEL & VICTORIA",
+        "Situs": "1127 S SUNSET DR  LODI",
+        "Minimum Bid": "$17,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 4.0,
+        "Assessor's Parcel Number": "033-060-170-000",
+        "Default Number": "DEF190000142",
+        "Assessee": "SPEARS, JULIA V EST",
+        "Situs": "1601 W VINE ST  LODI",
+        "Minimum Bid": "$28,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 5.0,
+        "Assessor's Parcel Number": "037-023-230-000",
+        "Default Number": "DEF190003072",
+        "Assessee": "HUGHES EMONE L",
+        "Situs": "1110  HOLLY DR  LODI",
+        "Minimum Bid": "$3,000.00",
+        "Comments": "Redeemed 12/13/24"
+    },
+    {
+        "Item Number": 6.0,
+        "Assessor's Parcel Number": "041-060-190-000",
+        "Default Number": "DEF190000180",
+        "Assessee": "BYRON, PATRICK A",
+        "Situs": "412 N CALIFORNIA ST  LODI",
+        "Minimum Bid": "$12,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 7.0,
+        "Assessor's Parcel Number": "043-210-210-000",
+        "Default Number": "DEF190000211",
+        "Assessee": "CORNEJO, ERIKA THALIA",
+        "Situs": "130 N CHEROKEE LN  LODI",
+        "Minimum Bid": "$38,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 8.0,
+        "Assessor's Parcel Number": "047-430-190-000",
+        "Default Number": "DEF190000243",
+        "Assessee": "POLSON, MICHAEL J & D F",
+        "Situs": "972  WOODROW ST  LODI",
+        "Minimum Bid": "$3,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 9.0,
+        "Assessor's Parcel Number": "051-090-040-000",
+        "Default Number": "DEF190000254",
+        "Assessee": "FLORES, LUIS J & NORMA A",
+        "Situs": "9057 E FIRST ST  VICTOR (Unincorporated)",
+        "Minimum Bid": "$14,000.00",
+        "Comments": "See CDD Memo"
+    },
+    {
+        "Item Number": 10.0,
+        "Assessor's Parcel Number": "062-047-200-000",
+        "Default Number": "DEF180003770",
+        "Assessee": "JOHNSTON, ROBIN & DONA ETAL",
+        "Situs": "1612 S CHURCH ST  LODI",
+        "Minimum Bid": "$13,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 11.0,
+        "Assessor's Parcel Number": "070-250-120-000",
+        "Default Number": "DEF190000384",
+        "Assessee": "CARVALHO JEFFREY S",
+        "Situs": "2678  EAGLE ROCK CI  STOCKTON",
+        "Minimum Bid": "$22,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 12.0,
+        "Assessor's Parcel Number": "072-300-600-000",
+        "Default Number": "DEF190000411",
+        "Assessee": "TANKERSLEY, SALLY G TR",
+        "Situs": "916  SPRINGOAK WY  STOCKTON",
+        "Minimum Bid": "$4,500.00",
+        "Comments": "Redeemed 9/24/24"
+    },
+    {
+        "Item Number": 13.0,
+        "Assessor's Parcel Number": "080-430-820-000",
+        "Default Number": "DEF190003262",
+        "Assessee": "CRESPO ANDRES M & CRESPO FABIOLA",
+        "Situs": "2943  WAUDMAN AV  STOCKTON",
+        "Minimum Bid": "$6,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 14.0,
+        "Assessor's Parcel Number": "082-070-120-000",
+        "Default Number": "DEF190000504",
+        "Assessee": "GUO, CHENGYU  ETAL",
+        "Situs": "8465  KELLEY DR  STOCKTON",
+        "Minimum Bid": "$16,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 15.0,
+        "Assessor's Parcel Number": "088-130-280-000",
+        "Default Number": "DEF190000545",
+        "Assessee": "CHILDRESS, SANDRA  ETAL",
+        "Situs": "737  GOTHAM DR  STOCKTON",
+        "Minimum Bid": "$14,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 16.0,
+        "Assessor's Parcel Number": "088-130-290-000",
+        "Default Number": "DEF190000546",
+        "Assessee": "CHILDRESS, SANDRA M TR",
+        "Situs": "8411  PEESKILL DR  STOCKTON",
+        "Minimum Bid": "$9,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 17.0,
+        "Assessor's Parcel Number": "088-180-130-000",
+        "Default Number": "DEF190000547",
+        "Assessee": "EVANS, THOMAS A ETAL",
+        "Situs": "7947  WEST LN  STOCKTON",
+        "Minimum Bid": "$8,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 18.0,
+        "Assessor's Parcel Number": "094-300-120-000",
+        "Default Number": "DEF190003433",
+        "Assessee": "ANGUIANO, JOE O JR  ETAL",
+        "Situs": "1548  WHITNEY ST  STOCKTON",
+        "Minimum Bid": "$3,500.00",
+        "Comments": "Redeemed 12/02/24"
+    },
+    {
+        "Item Number": 19.0,
+        "Assessor's Parcel Number": "098-060-550-000",
+        "Default Number": "DEF190000660",
+        "Assessee": "NORTH LAKE OWNERS ASSN",
+        "Situs": "3708  FORT DONELSON DR  STOCKTON",
+        "Minimum Bid": "$4,000.00",
+        "Comments": "Redeemed 9/26/24"
+    },
+    {
+        "Item Number": 20.0,
+        "Assessor's Parcel Number": "100-220-200-000",
+        "Default Number": "DEF190003412",
+        "Assessee": "MANNOR ANTHONY W & MANNOR DENA M",
+        "Situs": "3537  BRECKINRIDGE WY  STOCKTON",
+        "Minimum Bid": "$6,500.00",
+        "Comments": "Redeemed 12/27/2024"
+    },
+    {
+        "Item Number": 21.0,
+        "Assessor's Parcel Number": "104-270-240-000",
+        "Default Number": "DEF190000714",
+        "Assessee": "YOUNG, PAMELA",
+        "Situs": "4462  DENBY LN  STOCKTON",
+        "Minimum Bid": "$8,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 22.0,
+        "Assessor's Parcel Number": "108-310-010-000",
+        "Default Number": "DEF190000732",
+        "Assessee": "WILLIAMS, GEORGE & STACY",
+        "Situs": "1617  ST MARKS PZ A1 STOCKTON",
+        "Minimum Bid": "$10,500.00",
+        "Comments": "See Note 1"
+    },
+    {
+        "Item Number": 23.0,
+        "Assessor's Parcel Number": "108-310-020-000",
+        "Default Number": "DEF190000733",
+        "Assessee": "WILLIAMS, GEORGE & STACY",
+        "Situs": "1617  ST MARKS PZ A2 STOCKTON",
+        "Minimum Bid": "$10,500.00",
+        "Comments": "See Note 1"
+    },
+    {
+        "Item Number": 24.0,
+        "Assessor's Parcel Number": "109-200-300-000",
+        "Default Number": "DEF190000746",
+        "Assessee": "FLOOD, HEIDI",
+        "Situs": "3138 W PRINCETON AV  STOCKTON (Unincorporated)",
+        "Minimum Bid": "$20,500.00",
+        "Comments": "See CDD Memo"
+    },
+    {
+        "Item Number": 25.0,
+        "Assessor's Parcel Number": "111-230-180-000",
+        "Default Number": "DEF190000782",
+        "Assessee": "RENDELL, JUNE C ETAL",
+        "Situs": "1951 W EUCLID AV  STOCKTON (Unincorporated)",
+        "Minimum Bid": "$21,500.00",
+        "Comments": "See CDD Memo"
+    },
+    {
+        "Item Number": 26.0,
+        "Assessor's Parcel Number": "117-300-200-000",
+        "Default Number": "DEF190000889",
+        "Assessee": "PARSONS, KAY C & RUTH M TR",
+        "Situs": "1201  WATERLOO RD  STOCKTON",
+        "Minimum Bid": "$11,500.00",
+        "Comments": "Redeemed 12/27/2024"
+    },
+    {
+        "Item Number": 27.0,
+        "Assessor's Parcel Number": "123-184-150-000",
+        "Default Number": "DEF190000953",
+        "Assessee": "DANIELS, JOSEPH R",
+        "Situs": "1761 W COUNTRY CLUB BL  STOCKTON (Unincorporated)",
+        "Minimum Bid": "$13,000.00",
+        "Comments": "See CDD Memo"
+    },
+    {
+        "Item Number": 28.0,
+        "Assessor's Parcel Number": "125-020-050-000",
+        "Default Number": "DEF190000983",
+        "Assessee": "GARNER, CLOYD H JR LF EST ETAL",
+        "Situs": "3227  BONNIE LN  STOCKTON",
+        "Minimum Bid": "$9,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 29.0,
+        "Assessor's Parcel Number": "125-130-170-000",
+        "Default Number": "DEF190000987",
+        "Assessee": "DANIELS PROPERTIES INC",
+        "Situs": "65 E ARCADE ST  STOCKTON",
+        "Minimum Bid": "$25,500.00",
+        "Comments": "See EHD Memo"
+    },
+    {
+        "Item Number": 30.0,
+        "Assessor's Parcel Number": "130-070-180-000",
+        "Default Number": "DEF190001015",
+        "Assessee": "CHAVEZ, CHRISTOPHER J & ESTELLA",
+        "Situs": "3002  HORSETAIL DR  STOCKTON",
+        "Minimum Bid": "$22,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 31.0,
+        "Assessor's Parcel Number": "133-050-130-000",
+        "Default Number": "DEF190001038",
+        "Assessee": "WANG, XIA HUA",
+        "Situs": "2844  MONTE DIABLO AV  STOCKTON",
+        "Minimum Bid": "$3,500.00",
+        "Comments": "See EHD Memo"
+    },
+    {
+        "Item Number": 32.0,
+        "Assessor's Parcel Number": "137-070-270-000",
+        "Default Number": "DEF180001123",
+        "Assessee": "TOLKMIT, WILHELM J",
+        "Situs": "1422 N COMMERCE ST  STOCKTON",
+        "Minimum Bid": "$5,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 33.0,
+        "Assessor's Parcel Number": "141-142-210-000",
+        "Default Number": "DEF190001153",
+        "Assessee": "GARCIA, JOSE F",
+        "Situs": "2222  ANITA ST  STOCKTON",
+        "Minimum Bid": "$6,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 34.0,
+        "Assessor's Parcel Number": "141-214-030-000",
+        "Default Number": "DEF190001163",
+        "Assessee": "EG RETAIL LLC",
+        "Situs": "2285 E FREMONT ST  STOCKTON",
+        "Minimum Bid": "$15,000.00",
+        "Comments": "See EHD Memo"
+    },
+    {
+        "Item Number": 35.0,
+        "Assessor's Parcel Number": "147-310-030-000",
+        "Default Number": "DEF190001253",
+        "Assessee": "BOBIAN BRITTANY",
+        "Situs": "904 S GRANT ST  STOCKTON",
+        "Minimum Bid": "$19,000.00",
+        "Comments": "See Note 2"
+    },
+    {
+        "Item Number": 36.0,
+        "Assessor's Parcel Number": "147-310-050-000",
+        "Default Number": "DEF190001254",
+        "Assessee": "BOBIAN BRITTANY",
+        "Situs": "820 E WORTH ST  STOCKTON",
+        "Minimum Bid": "$23,500.00",
+        "Comments": "See Note 2"
+    },
+    {
+        "Item Number": 37.0,
+        "Assessor's Parcel Number": "149-264-120-000",
+        "Default Number": "DEF190001273",
+        "Assessee": "CONCHA SALVADOR",
+        "Situs": "437 S GRANT ST  STOCKTON",
+        "Minimum Bid": "$7,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 38.0,
+        "Assessor's Parcel Number": "149-270-200-000",
+        "Default Number": "DEF190001279",
+        "Assessee": "GUO, CHENGYU",
+        "Situs": "545 S STANISLAUS ST  STOCKTON",
+        "Minimum Bid": "$21,500.00",
+        "Comments": "See EHD Memo"
+    },
+    {
+        "Item Number": 39.0,
+        "Assessor's Parcel Number": "151-023-050-000",
+        "Default Number": "DEF190001281",
+        "Assessee": "GRAVES, JAMES C",
+        "Situs": "1251 N SIERRA NEVADA ST  STOCKTON",
+        "Minimum Bid": "$10,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 40.0,
+        "Assessor's Parcel Number": "151-024-210-000",
+        "Default Number": "DEF190001283",
+        "Assessee": "SCHAENEMAN, BRUCE  ETAL",
+        "Situs": "1230 N SIERRA NEVADA ST  STOCKTON",
+        "Minimum Bid": "$9,000.00",
+        "Comments": "Redeemed 9/26/24"
+    },
+    {
+        "Item Number": 41.0,
+        "Assessor's Parcel Number": "151-110-060-000",
+        "Default Number": "DEF190001304",
+        "Assessee": "AGUAYO, ENRIQUE",
+        "Situs": "901 E MINER AV  STOCKTON",
+        "Minimum Bid": "$61,500.00",
+        "Comments": "See EHD Memo"
+    },
+    {
+        "Item Number": 42.0,
+        "Assessor's Parcel Number": "151-205-140-000",
+        "Default Number": "DEF110002166",
+        "Assessee": "HOMELESS HABITAT INC FORMERLY ROWAN, DANIEL LEE TR",
+        "Situs": "18 N PILGRIM ST STOCKTON",
+        "Minimum Bid": "$231,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 43.0,
+        "Assessor's Parcel Number": "151-350-060-000",
+        "Default Number": "DEF190001329",
+        "Assessee": "MARTIN, JAMES E & MARY R TR",
+        "Situs": "1211 S WILSON WY  STOCKTON",
+        "Minimum Bid": "$29,500.00",
+        "Comments": "See EHD Memo, Redeemed 12/05/24"
+    },
+    {
+        "Item Number": 44.0,
+        "Assessor's Parcel Number": "153-201-010-000",
+        "Default Number": "DEF190001348",
+        "Assessee": "CAMEL, LAVON",
+        "Situs": "2204 E WASHINGTON ST  STOCKTON",
+        "Minimum Bid": "$8,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 45.0,
+        "Assessor's Parcel Number": "155-090-340-000",
+        "Default Number": "DEF190001365",
+        "Assessee": "MINOR BETTIE",
+        "Situs": "1707  MILTON ST  STOCKTON",
+        "Minimum Bid": "$19,000.00",
+        "Comments": "Redeemed 12/23/24"
+    },
+    {
+        "Item Number": 46.0,
+        "Assessor's Parcel Number": "155-330-100-000",
+        "Default Number": "DEF190001386",
+        "Assessee": "FISK, DOROTHY M EST",
+        "Situs": "2280 E HAZELTON AV  STOCKTON",
+        "Minimum Bid": "$37,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 47.0,
+        "Assessor's Parcel Number": "157-090-020-000",
+        "Default Number": "DEF190001412",
+        "Assessee": "SOTO, MARTIN DIAZ  ETAL",
+        "Situs": "403 S SHASTA AV  STOCKTON",
+        "Minimum Bid": "$15,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 48.0,
+        "Assessor's Parcel Number": "163-520-440-000",
+        "Default Number": "DEF190003733",
+        "Assessee": "LOPEZ JESUS GUADALUPE & PADILLA JUANA",
+        "Situs": "2152  WALL ST  STOCKTON",
+        "Minimum Bid": "$7,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 49.0,
+        "Assessor's Parcel Number": "163-740-270-000",
+        "Default Number": "DEF190003847",
+        "Assessee": "VILLARADO ISAIAS T HUESCA",
+        "Situs": "1660  TRUCKEE LN  STOCKTON",
+        "Minimum Bid": "$5,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 50.0,
+        "Assessor's Parcel Number": "165-080-520-000",
+        "Default Number": "DEF190001544",
+        "Assessee": "SOMOSIERRA, ISMAEL SR & SONIA TR",
+        "Situs": "130  HOWARD ST  STOCKTON",
+        "Minimum Bid": "$2,500.00",
+        "Comments": "Redeemed 9/30/24"
+    },
+    {
+        "Item Number": 51.0,
+        "Assessor's Parcel Number": "165-130-290-000",
+        "Default Number": "DEF190001553",
+        "Assessee": "SOMOSIERRA, ISMAEL SR & SONIA TR",
+        "Situs": "261  DELHI AV  STOCKTON",
+        "Minimum Bid": "$10,000.00",
+        "Comments": "Redeemed 9/30/24"
+    },
+    {
+        "Item Number": 52.0,
+        "Assessor's Parcel Number": "165-130-300-000",
+        "Default Number": "DEF190001554",
+        "Assessee": "SOMOSIERRA, ISMAEL SR & SONIA TR",
+        "Situs": "263  DELHI AV  STOCKTON",
+        "Minimum Bid": "$3,500.00",
+        "Comments": "Redeemed 9/30/24"
+    },
+    {
+        "Item Number": 53.0,
+        "Assessor's Parcel Number": "165-240-020-000",
+        "Default Number": "DEF190001566",
+        "Assessee": "JACKSON, CLARENCE A",
+        "Situs": "2485 S COMMERCE ST  STOCKTON",
+        "Minimum Bid": "$37,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 54.0,
+        "Assessor's Parcel Number": "165-261-010-000",
+        "Default Number": "DEF120002287",
+        "Assessee": "HOMELESS HABITAT INC FORMERLY ROWAN, DANIEL LEE TR",
+        "Situs": "582 W NINTH ST STOCKTON",
+        "Minimum Bid": "$124,500.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 55.0,
+        "Assessor's Parcel Number": "165-310-330-000",
+        "Default Number": "DEF190004028",
+        "Assessee": "MARQUEZ, RAFAEL M JR & PRIYA VINITA",
+        "Situs": "2614  FAIRMONT AV  STOCKTON",
+        "Minimum Bid": "$2,000.00",
+        "Comments": NaN
+    },
+    {
+        "Item Number": 56.0,
+        "Assessor's Parcel Number": "167-170-370-000",
+        "Default Number": "DEF190003042",
+        "Assessee": "WILLIAMS ANGELICA",
+        "Situs": "711 E SECOND ST  STOCKTON",
+        "Minimum Bid": "$2,000.00",
+        "Comments": "Redeemed 12/13/24"
+    },
+    {
+        "Item Number": 57.0,
+        "Assessor's Parcel Number": "169-076-010-000",
+        "Default Number": "DEF190001646",
+        "Assessee": "DOUGLAS, AUDREY R",
+        "Situs": "2104 S PILGRIM ST  STOCKTON",
+        "Minimum Bid": "$11,500.00",
+        "Comments": NaN
+    }
+]
