@@ -8,7 +8,7 @@ import time
 import pandas as pd
 from selenium.webdriver.support.wait import WebDriverWait
 
-driver_path = "D:\\chromedriver-win64\\chromedriver.exe"
+driver_path = r"C:\Users\shira\Downloads\chromedriver-win64 (3)\chromedriver-win64\chromedriver.exe"
 service = Service(driver_path)
 
 driver = webdriver.Chrome(service=service)
@@ -47,27 +47,69 @@ def find_results_per_page():
         print(len(property_elements), "length is ")
 
 
-
-        for index, property_element in enumerate(property_elements):
+        for index, property_element in enumerate(property_elements[:1]):
             try:
                 # Scroll to the element
                 driver.execute_script("arguments[0].scrollIntoView(true);", property_element)
                 time.sleep(1)  # Give some time for the scroll
 
+                more_details_button = property_element.find_element(By.CLASS_NAME, "view-more")  # Find the <a> button inside
+
                 # Click on the "More Details" button (replace the selector as needed)
-                more_details_button = property_element.find_element(By.XPATH,
-                                                                    ".//button[contains(text(), 'More Details')]")
                 more_details_button.click()
+                time.sleep(10)
+                print("waiting for more details")
 
                 # Wait for the details to load (adjust the selector as necessary)
-                details_section = wait.until(
-                    EC.presence_of_element_located((By.CLASS_NAME, "details-class"))  # Replace with the actual class
-                )
+                # details_section = wait.until(
+                #     EC.presence_of_element_located((By.CLASS_NAME, "details-class"))  # Replace with the actual class
+                # )
 
                 # Extract key-value pairs
-                address = driver.find_element(By.CLASS_NAME, "ng-binding")
+                # address = driver.find_element(By.CLASS_NAME, "ng-binding")
+                #
+                # print(address.text, "address is ")
 
-                print(address.text, "address is ")
+
+                # Initialize WebDriver (Make sure to update with your WebDriver path)
+
+
+                # Extract Key-Value Data
+                def extract_property_details():
+                    property_details = {}
+
+                    # Extracting the Address (from the h1 tag)
+                    address = driver.find_element(By.CSS_SELECTOR, "h1.ng-binding").text
+                    property_details["Address"] = address
+
+                    # Extracting key-value pairs from the "dl-horizontal" section
+                    keys = driver.find_elements(By.CSS_SELECTOR, "dl.dl-horizontal dt")  # All the <dt> tags (keys)
+                    values = driver.find_elements(By.CSS_SELECTOR, "dl.dl-horizontal dd")  # All the <dd> tags (values)
+
+                    # Zip the keys and values together and add them to the dictionary
+                    for key, value in zip(keys, values):
+                        property_details[key.text.strip()] = value.text.strip()
+
+                    # Extracting additional key-value pairs from the last section
+                    additional_keys = driver.find_elements(By.CSS_SELECTOR,
+                                                           "div.additional-info dt")  # Locate additional key tags
+                    additional_values = driver.find_elements(By.CSS_SELECTOR,
+                                                             "div.additional-info dd")  # Locate additional value tags
+
+                    # Zip the additional keys and values together and add them to the dictionary
+                    for key, value in zip(additional_keys, additional_values):
+                        property_details[key.text.strip()] = value.text.strip()
+
+                    return property_details
+
+                # Extract property details
+                property_details = extract_property_details()
+
+                # Print the extracted data
+                for key, value in property_details.items():
+                    print(f"{key}: {value}")
+
+
 
                 exit()
 
@@ -100,7 +142,7 @@ def extract_details():
 
     data.append(details)
 
-
+print("before calling results per page")
 find_results_per_page()
 exit()
 
