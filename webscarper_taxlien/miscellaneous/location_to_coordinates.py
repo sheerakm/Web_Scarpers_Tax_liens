@@ -1,12 +1,13 @@
 from geopy.geocoders import Nominatim
 
 geolocator = Nominatim(user_agent="geoapi")
-location = geolocator.geocode("3302 S Harwood St, Dallas TX 75215-3434 ")
 
 
+def convert_location_to_x_y(address):
+    geolocator = Nominatim(user_agent="geoapi")
 
-print(location.latitude, location.longitude)
+    location = geolocator.geocode(address)
 
-location = geolocator.geocode("3302 S Harwood St, Dallas TX ")
+    return location.latitude, location.longitude
 
-print(location.latitude, location.longitude)
+

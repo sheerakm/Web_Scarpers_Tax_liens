@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support import expected_conditions as EC
+from miscellaneous.location_to_coordinates import convert_location_to_x_y
 
 import time
 import pandas as pd
@@ -91,16 +92,32 @@ def find_results_per_page():
                         property_details[key.text.strip()] = value.text.strip()
 
                     # Extracting additional key-value pairs from the last section
-                    additional_keys = driver.find_elements(By.CSS_SELECTOR,
-                                                           "div.additional-info dt")  # Locate additional key tags
-                    additional_values = driver.find_elements(By.CSS_SELECTOR,
-                                                             "div.additional-info dd")  # Locate additional value tags
+                    faq_items = driver.find_elements(By.CLASS_NAME, "faq-item")
 
-                    # Zip the additional keys and values together and add them to the dictionary
-                    for key, value in zip(additional_keys, additional_values):
-                        property_details[key.text.strip()] = value.text.strip()
+                    for item in faq_items:
+                        key = item.find_element(By.TAG_NAME, "h3").text.strip()
+                        value = item.find_element(By.TAG_NAME, "p").text.strip()
+                        property_details[key] = value
+
+                    for key, value in property_details.items():
+                        if not value :
+                            property_details[key] = None
+
+
+                    property_details['latitude' ], property_details['longitude' ] = convert_location_to_x_y(property_details['Address'])
+
+                    more_link = driver.find_element(By.XPATH, "//a[contains(text(),'more')]")
+                    more_link.click()
+
+                    # Get full legal description
+                    full_description = driver.find_element(By.XPATH, "//span[@ng-show='detail.expandedLegal']").text
+
+                    property_details['Legal Description'] = full_description.rstrip("less...")
+
 
                     return property_details
+
+
 
                 # Extract property details
                 property_details = extract_property_details()
@@ -112,7 +129,6 @@ def find_results_per_page():
 
 
                 exit()
-
 
 
                 # Close the details section if necessary
