@@ -1,10 +1,13 @@
+import traceback
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 from miscellaneous.location_to_coordinates import convert_location_to_x_y
-
+import firebase_admin
+from firebase_admin import firestore
 import time
 import pandas as pd
 from selenium.webdriver.support.wait import WebDriverWait
@@ -20,7 +23,7 @@ driver = webdriver.Chrome(service=service, options=options)
 
 # driver = webdriver.Chrome()
 
-wait = WebDriverWait(driver, 10)
+wait = WebDriverWait(driver, 4)
 
 
 url = "https://taxsales.lgbs.com/map?lat=31.3198574459354&lon=-100.07684249999998&zoom=6&offset=0&ordering=precinct,sale_nbr,uid&sale_type=SALE,RESALE,STRUCK%20OFF,FUTURE%20SALE&in_bbox=-111.22796554687498,23.43704307977609,-88.92571945312498,38.5945502122854"
@@ -44,15 +47,15 @@ data = { 'parcels': []}
 
 
 
-def find_results_per_page(data):
+def find_results_per_page():
     try:
         result_body = driver.find_element(By.CLASS_NAME, "result-body")
 
 
         property_elements = driver.find_elements(By.TAG_NAME, "property-listing")
 
-        print(property_elements)
-        print(len(property_elements), "length is ")
+        # print(property_elements)
+        # print(len(property_elements), "length is ")
 
 
         for index, property_element in enumerate(property_elements):
@@ -101,7 +104,7 @@ def find_results_per_page(data):
 
                     # Zip the keys and values together and add them to the dictionary
                     for key, value in zip(keys, values):
-                        property_details[key.text.strip()] = value.text.strip()
+                        property_details[key.text.strip().rstrip(':')] = value.text.strip()
 
                     # Extracting additional key-value pairs from the last section
                     faq_items = driver.find_elements(By.CLASS_NAME, "faq-item")
@@ -119,14 +122,16 @@ def find_results_per_page(data):
 
                     property_details['latitude' ], property_details['longitude' ] = convert_location_to_x_y(property_details['Address'])
 
-                    more_link = driver.find_element(By.XPATH, "//a[contains(text(),'more')]")
-                    more_link.click()
+                    try:
+                        more_link = driver.find_element(By.XPATH, "//a[contains(text(),'more')]")
+                        more_link.click()
 
-                    # Get full legal description
-                    full_description = driver.find_element(By.XPATH, "//span[@ng-show='detail.expandedLegal']").text
+                        # Get full legal description
+                        full_description = driver.find_element(By.XPATH, "//span[@ng-show='detail.expandedLegal']").text
 
-                    property_details['Legal Description'] = full_description.rstrip("less...")
-
+                        property_details['Legal Description'] = full_description.rstrip("less...")
+                    except:
+                        print("no button to click more")
 
                     return property_details
 
@@ -176,13 +181,14 @@ def find_results_per_page(data):
         print(len(data['parcels']), "is len 10?")
 
     finally:
-        driver.quit()
+        # driver.quit()
+        print('finished this page')
 
 def extract_details():
     details_button = driver.find_element(By.XPATH, "//button[contains(text(), 'More Details')]")
     details_button.click()
 
-    time.sleep(2)
+    time.sleep(0.5)
 
     detail_elements = driver.find_elements(By.XPATH, "//div[@class='detail-class']")  # Modify the class
 
@@ -194,27 +200,71 @@ def extract_details():
 
     data.append(details)
 
-print("before calling results per page")
-find_results_per_page(data)
-exit()
+# print("before calling results per page")
+# find_results_per_page()
 
+#
+#
+# while True:
+#     # Find all result elements that have a "More Details" button
+#     results = driver.find_elements(By.XPATH, "//div[@class='result-class']")  # Modify the class
+#
+#     for result in results:
+#         ActionChains(driver).move_to_element(result).perform()  # Hover to ensure button is clickable
+#         extract_details()  # Extract the details for this item
+#
+#     # Check if there is a "Next Page" or similar button to go through all pages
+#     next_page_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Next')]")  # Adjust for actual pagination button
+#
+#     if next_page_button:
+#         next_page_button.click()
+#         time.sleep(3)  # Wait for the page to load
+#     else:
+#         break  # Exit loop if no more pages
+
+wait = WebDriverWait(driver, 30)  # Adjust timeout as needed
+#
 
 while True:
-    # Find all result elements that have a "More Details" button
-    results = driver.find_elements(By.XPATH, "//div[@class='result-class']")  # Modify the class
+    # Wait until the results are present
+    print("collection started")
+    EC.presence_of_all_elements_located((By.XPATH, "//div[@class='result-class']"))
 
-    for result in results:
-        ActionChains(driver).move_to_element(result).perform()  # Hover to ensure button is clickable
-        extract_details()  # Extract the details for this item
+    # for result in results:
+    #     ActionChains(driver).move_to_element(result).perform()  # Hover to ensure button is clickable
+    #     extract_details()  # Extract the details for this item
+    find_results_per_page()
 
-    # Check if there is a "Next Page" or similar button to go through all pages
-    next_page_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Next')]")  # Adjust for actual pagination button
+    print("first page")
+    try:
+        # Wait until the "Next" button is present and clickable
 
-    if next_page_button:
-        next_page_button.click()
-        time.sleep(3)  # Wait for the page to load
-    else:
-        break  # Exit loop if no more pages
+
+        next_button = driver.find_element(By.XPATH, "//a[@ng-click='selectPage(page + 1, $event)']")
+        next_button.click()
+        time.sleep(2.5)  # Wait for the page to load
+
+        # time.sleep(3)  # Allow page to load
+    except Exception as e:
+        print("Exception occurred:")
+        traceback.print_exc()  # Print the full traceback
+
+# data['last_updated'] = firestore.SERVER_TIMESTAMP
+
+print(len(data['parcels']), "finished!")
+
+import json
+
+
+# Specify the path to the file where you want to save the JSON
+file_path = "data.json"
+
+# Open the file in write mode and dump the JSON data
+with open(file_path, "w") as json_file:
+    json.dump(data, json_file, indent=4)
+
+print(f"Data has been written to {file_path}")
+
 
 # # Convert the collected data into a pandas DataFrame and save it to a CSV
 # df = pd.DataFrame(data)
