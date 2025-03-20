@@ -44,7 +44,7 @@ data = { 'parcels': []}
 
 
 
-def find_results_per_page():
+def find_results_per_page(data):
     try:
         result_body = driver.find_element(By.CLASS_NAME, "result-body")
 
@@ -65,7 +65,7 @@ def find_results_per_page():
 
                 # Click on the "More Details" button (replace the selector as needed)
                 more_details_button.click()
-                time.sleep(10)
+                # time.sleep(10)
                 print("waiting for more details")
 
                 # # Wait for the details to load (adjust the selector as necessary)
@@ -173,7 +173,7 @@ def find_results_per_page():
             except Exception as e:
                 print(f"Error processing property {index + 1}: {e}")
                 continue
-        print(len(data), "is len 10?")
+        print(len(data['parcels']), "is len 10?")
 
     finally:
         driver.quit()
@@ -195,7 +195,7 @@ def extract_details():
     data.append(details)
 
 print("before calling results per page")
-find_results_per_page()
+find_results_per_page(data)
 exit()
 
 
