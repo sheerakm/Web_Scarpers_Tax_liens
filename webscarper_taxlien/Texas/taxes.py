@@ -12,7 +12,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 driver_path = r"C:\Users\shira\Downloads\chromedriver-win64 (3)\chromedriver-win64\chromedriver.exe"
 service = Service(driver_path)
 
-driver = webdriver.Chrome(service=service)
+options = webdriver.ChromeOptions()
+options.add_argument("--enable-logging")
+options.add_argument("--v=1")  # Increase verbosity
+
+driver = webdriver.Chrome(service=service, options=options)
+
+# driver = webdriver.Chrome()
 
 wait = WebDriverWait(driver, 10)
 
@@ -33,7 +39,8 @@ except Exception as e:
 
 time.sleep(5)
 
-data = []
+data = { 'parcels': []}
+
 
 
 
@@ -48,7 +55,7 @@ def find_results_per_page():
         print(len(property_elements), "length is ")
 
 
-        for index, property_element in enumerate(property_elements[:1]):
+        for index, property_element in enumerate(property_elements):
             try:
                 # Scroll to the element
                 driver.execute_script("arguments[0].scrollIntoView(true);", property_element)
@@ -61,7 +68,7 @@ def find_results_per_page():
                 time.sleep(10)
                 print("waiting for more details")
 
-                # Wait for the details to load (adjust the selector as necessary)
+                # # Wait for the details to load (adjust the selector as necessary)
                 # details_section = wait.until(
                 #     EC.presence_of_element_located((By.CLASS_NAME, "details-class"))  # Replace with the actual class
                 # )
@@ -80,7 +87,12 @@ def find_results_per_page():
                     property_details = {}
 
                     # Extracting the Address (from the h1 tag)
-                    address = driver.find_element(By.CSS_SELECTOR, "h1.ng-binding").text
+
+                    address = WebDriverWait(driver, 10).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, "h1.ng-binding"))
+                    ).text
+
+                    # address = driver.find_element(By.CSS_SELECTOR, "h1.ng-binding").text
                     property_details["Address"] = address
 
                     # Extracting key-value pairs from the "dl-horizontal" section
@@ -102,6 +114,7 @@ def find_results_per_page():
                     for key, value in property_details.items():
                         if not value :
                             property_details[key] = None
+                    print(index, property_details, "printing")
 
 
                     property_details['latitude' ], property_details['longitude' ] = convert_location_to_x_y(property_details['Address'])
@@ -120,24 +133,47 @@ def find_results_per_page():
 
 
                 # Extract property details
-                property_details = extract_property_details()
+                data['parcels'].append(extract_property_details())
 
-                # Print the extracted data
-                for key, value in property_details.items():
-                    print(f"{key}: {value}")
-
-
-
-                exit()
+                # # Print the extracted data
+                # for key, value in property_details.items():
+                #     print(f"{key}: {value}")
+                #
+                #
+                #
+                # exit()
 
 
                 # Close the details section if necessary
-                close_button = driver.find_element(By.CLASS_NAME, "close-button-class")  # Replace with actual class
-                close_button.click()
+                # close_button = driver.find_element(By.CLASS_NAME, "close-button-class")  # Replace with actual class
+                # close_button.click()
+                # driver.back()
+
+                try:
+                    # Wait for the close button to be clickable
+                    close_button = WebDriverWait(driver, 10).until(
+                        EC.element_to_be_clickable(
+                            (By.XPATH, "//button[@class='close' and @ng-click='detailmodal.close()']"))
+                    )
+
+                    # Click the button
+                    close_button.click()
+
+                    # Wait until the button disappears (modal is closed)
+                    WebDriverWait(driver, 10).until(
+                        EC.invisibility_of_element(
+                            (By.XPATH, "//button[@class='close' and @ng-click='detailmodal.close()']"))
+                    )
+
+                    print("Modal closed successfully.")
+
+                except Exception as e:
+                    print("Error:", e)
 
             except Exception as e:
                 print(f"Error processing property {index + 1}: {e}")
                 continue
+        print(len(data), "is len 10?")
 
     finally:
         driver.quit()
