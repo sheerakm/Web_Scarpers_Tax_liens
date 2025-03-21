@@ -1,4 +1,5 @@
 import traceback
+import json
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -27,6 +28,7 @@ wait = WebDriverWait(driver, 4)
 
 
 url = "https://taxsales.lgbs.com/map?lat=31.3198574459354&lon=-100.07684249999998&zoom=6&offset=0&ordering=precinct,sale_nbr,uid&sale_type=SALE,RESALE,STRUCK%20OFF,FUTURE%20SALE&in_bbox=-111.22796554687498,23.43704307977609,-88.92571945312498,38.5945502122854"
+# url = "https://taxsales.lgbs.com/map?lat=31.3198574459354&lon=-100.07684249999998&zoom=6&offset=210&ordering=precinct,sale_nbr,uid&sale_type=SALE,RESALE,STRUCK%20OFF,FUTURE%20SALE&in_bbox=-111.32684249999998,23.346292602061006,-88.82684249999998,38.6717888372751"
 driver.get(url)
 
 time.sleep(5) # wait = WebDriverWait(driver, 10) agreement page not showing up, so causes problem
@@ -48,11 +50,17 @@ data = { 'parcels': []}
 
 
 def find_results_per_page():
+    flag = False
     try:
         result_body = driver.find_element(By.CLASS_NAME, "result-body")
 
 
+
         property_elements = driver.find_elements(By.TAG_NAME, "property-listing")
+        if len(property_elements) <10 and len(property_elements)> 0:
+            print(len(property_elements), "length is ")
+            flag = True
+
 
         # print(property_elements)
         # print(len(property_elements), "length is ")
@@ -62,14 +70,21 @@ def find_results_per_page():
             try:
                 # Scroll to the element
                 driver.execute_script("arguments[0].scrollIntoView(true);", property_element)
-                time.sleep(1)  # Give some time for the scroll
+                time.sleep(0.9)  # Give some time for the scroll
 
-                more_details_button = property_element.find_element(By.CLASS_NAME, "view-more")  # Find the <a> button inside
 
-                # Click on the "More Details" button (replace the selector as needed)
-                more_details_button.click()
-                # time.sleep(10)
-                print("waiting for more details")
+                try:
+
+                    more_details_button = property_element.find_element(By.CLASS_NAME, "view-more")  # Find the <a> button inside
+
+                    # Click on the "More Details" button (replace the selector as needed)
+                    more_details_button.click()
+                    # time.sleep(10)
+                    print("waiting for more details")
+                except:
+                    print("view more didn't work")
+
+
 
                 # # Wait for the details to load (adjust the selector as necessary)
                 # details_section = wait.until(
@@ -136,9 +151,11 @@ def find_results_per_page():
                     return property_details
 
 
-
+                try:
                 # Extract property details
-                data['parcels'].append(extract_property_details())
+                    data['parcels'].append(extract_property_details())
+                except:
+                    print("failed to extract")
 
                 # # Print the extracted data
                 # for key, value in property_details.items():
@@ -153,12 +170,15 @@ def find_results_per_page():
                 # close_button = driver.find_element(By.CLASS_NAME, "close-button-class")  # Replace with actual class
                 # close_button.click()
                 # driver.back()
+                worked = False
 
                 try:
+
                     # Wait for the close button to be clickable
                     close_button = WebDriverWait(driver, 10).until(
                         EC.element_to_be_clickable(
-                            (By.XPATH, "//button[@class='close' and @ng-click='detailmodal.close()']"))
+                            (By.XPATH, "//button[contains(@class, 'close')]")
+)
                     )
 
                     # Click the button
@@ -169,16 +189,31 @@ def find_results_per_page():
                         EC.invisibility_of_element(
                             (By.XPATH, "//button[@class='close' and @ng-click='detailmodal.close()']"))
                     )
+                    worked = True
 
                     print("Modal closed successfully.")
 
                 except Exception as e:
                     print("Error:", e)
 
+                if not worked:
+                    try:
+                        close_button = WebDriverWait(driver, 10).until(
+                            EC.element_to_be_clickable(
+                                (By.XPATH, "//button[@class='btn btn-primary' and @ng-click='detailmodal.close()']"))
+                        )
+                        close_button.click()
+                        worked = True
+
+                    except:
+                        print("failed again")
+                        break
+
             except Exception as e:
                 print(f"Error processing property {index + 1}: {e}")
                 continue
         print(len(data['parcels']), "is len 10?")
+        return flag
 
     finally:
         # driver.quit()
@@ -188,7 +223,7 @@ def extract_details():
     details_button = driver.find_element(By.XPATH, "//button[contains(text(), 'More Details')]")
     details_button.click()
 
-    time.sleep(0.5)
+    time.sleep(0.7)
 
     detail_elements = driver.find_elements(By.XPATH, "//div[@class='detail-class']")  # Modify the class
 
@@ -233,7 +268,9 @@ while True:
     # for result in results:
     #     ActionChains(driver).move_to_element(result).perform()  # Hover to ensure button is clickable
     #     extract_details()  # Extract the details for this item
-    find_results_per_page()
+    result = find_results_per_page()
+    if result :
+        break
 
     print("first page")
     try:
@@ -241,19 +278,28 @@ while True:
 
 
         next_button = driver.find_element(By.XPATH, "//a[@ng-click='selectPage(page + 1, $event)']")
+        driver.execute_script("arguments[0].scrollIntoView();", next_button)
+
         next_button.click()
+
         time.sleep(2.5)  # Wait for the page to load
 
         # time.sleep(3)  # Allow page to load
     except Exception as e:
         print("Exception occurred:")
         traceback.print_exc()  # Print the full traceback
+        file_path = "data.json"
+
+        # Open the file in write mode and dump the JSON data
+        with open(file_path, "w") as json_file:
+            json.dump(data, json_file, indent=4)
+
+        print(f"Data has been written to {file_path}")
 
 # data['last_updated'] = firestore.SERVER_TIMESTAMP
 
 print(len(data['parcels']), "finished!")
 
-import json
 
 
 # Specify the path to the file where you want to save the JSON

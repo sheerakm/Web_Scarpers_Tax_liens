@@ -13,8 +13,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 driver_path = r"C:\Users\shira\Downloads\chromedriver-win64 (3)\chromedriver-win64\chromedriver.exe"
 service = Service(driver_path)
+# chrome_options = Options()
 
-driver = webdriver.Chrome(service=service)
+# chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
+
+
+driver = webdriver.Chrome(service=service, )
 
 wait = WebDriverWait(driver, 10)
 
@@ -25,7 +29,6 @@ url = r'https://www.bid4assets.com/county-tax-sales'
 download_directory = r"C:\Users\shira\OneDrive\Desktop\tax_liens_web_scarper\Web_Scarpers_Tax_liens\webscarper_taxlien\AssetsForBid"  # Replace with your desired directory
 
 chrome_options = Options()
-chrome_options.add_argument("--headless")  # Optional: Run Chrome in headless mode
 chrome_options.add_experimental_option("prefs", {
     "download.default_directory": download_directory,  # Set download path
     "download.prompt_for_download": False,  # Disable the download prompt
@@ -85,11 +88,26 @@ print(links)
 print(len(links))
 print("before final for loop")
 for link in links:
-    driver.get( link)
+    time.sleep(1)
     print(link)
+    driver.get(link)
+
+
+    print(link)
+    time.sleep(1)
+    element = driver.find_element(By.CSS_SELECTOR, 'a[href="#collapseFive"]')
+
+    # Click the element to expand the section
+    element.click()
+
+    # Optionally, wait for content to be visible
+    time.sleep(1)
+
     button = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,
         "//button[contains(text(), 'Click Here to Download Property List Spreadsheet')]"))
+
                             )
+    time.sleep(0.5)
 
 
 driver.quit()
