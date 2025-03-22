@@ -56,7 +56,10 @@ for index, parcel in enumerate(data):
 
     def clean_address(address):
         # Regular expression to match CA, space, 5 digits, and everything after
-        cleaned_address = re.sub(r'\sCA \d{5}.*', '', address)
+        try:
+            cleaned_address = re.sub(r'\sCA \d{5}.*', '', address)
+        except:
+            cleaned_address = address
         return cleaned_address
 
 
