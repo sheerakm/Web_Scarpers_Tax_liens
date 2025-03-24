@@ -88,7 +88,7 @@ for index, parcel in enumerate(data):
         subcollection_ref = county_doc_ref.collection("Parcels")
 
 
-        subcollection_ref.add(parcel)  # Firestore generates a unique ID automatically
+        subcollection_ref.add(new_parcel)  # Firestore generates a unique ID automatically
 
     except Exception as e:
             print(f"Failed to write data")
