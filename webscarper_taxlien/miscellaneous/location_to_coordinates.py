@@ -4,7 +4,7 @@ geolocator = Nominatim(user_agent="geoapi")
 
 
 def convert_location_to_x_y(address):
-    geolocator = Nominatim(user_agent="geoapi")
+    geolocator = Nominatim(user_agent="geoapi", timeout= 10)
 
     location = geolocator.geocode(address)
     if location:

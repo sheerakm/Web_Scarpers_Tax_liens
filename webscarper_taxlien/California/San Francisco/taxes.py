@@ -27,8 +27,7 @@ driver = webdriver.Chrome(service=service, options=options)
 wait = WebDriverWait(driver, 4)
 
 
-url = "https://taxsales.lgbs.com/map?lat=31.3198574459354&lon=-100.07684249999998&zoom=6&offset=0&ordering=precinct,sale_nbr,uid&sale_type=SALE,RESALE,STRUCK%20OFF,FUTURE%20SALE&in_bbox=-111.22796554687498,23.43704307977609,-88.92571945312498,38.5945502122854"
-# url = "https://taxsales.lgbs.com/map?lat=31.3198574459354&lon=-100.07684249999998&zoom=6&offset=210&ordering=precinct,sale_nbr,uid&sale_type=SALE,RESALE,STRUCK%20OFF,FUTURE%20SALE&in_bbox=-111.32684249999998,23.346292602061006,-88.82684249999998,38.6717888372751"
+url = r'https://sanfrancisco.mytaxsale.com/auction/7'
 driver.get(url)
 
 time.sleep(5) # wait = WebDriverWait(driver, 10) agreement page not showing up, so causes problem
