@@ -15,5 +15,5 @@ def convert_location_to_x_y(address):
         return None, None
 
 
-print(convert_location_to_x_y('8315 HILLCROFT DR LOS ANGELES CA 91304 2113'))
+print(convert_location_to_x_y('500 EAST 147 STREET Bronx, NY 10455'))
 

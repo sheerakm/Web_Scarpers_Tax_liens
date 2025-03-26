@@ -22,7 +22,7 @@ key_mapping = {
 
 
 county_level_data = {
-    "Auction Start": datetime(2025, 3, 27, 9, 30)
+    "Auction Start": datetime(2025, 5, 20, 00, 00)
 }
 
 
@@ -52,7 +52,7 @@ db = firestore.client()
 
 
 try:
-    county_doc_ref = db.collection("States").document("Florida").collection("Counties").document('Hillsborough')
+    county_doc_ref = db.collection("States").document("New York").collection("Counties").document('Kings')
 
 
     county_doc_ref.set({"last_updated": datetime.utcnow()}, merge=True)
@@ -61,6 +61,12 @@ try:
 
 
     subcollection_ref.add(county_level_data)  # Firestore generates a unique ID automatically
+
+    subcollection2_ref = county_doc_ref.collection("Keys")
+
+
+    subcollection2_ref.add(key_mapping)  # Firestore generates a unique ID automatically
+
 
 except Exception as e:
         print(f"Failed to write data")
