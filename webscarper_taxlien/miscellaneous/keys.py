@@ -10,19 +10,33 @@ from firebase_admin import credentials, firestore
 
 
 key_mapping = {
-    'linked_to_profile': 'linked_to_profile',  # No exact match, needs manual handling
-    'Auction Type': 'Sale Type',
-    'Case #': 'Cause Number',
-    'Certificate #': 'Writ Number',  # No exact match, but can be tracked
-    'Opening Bid': 'Est. Minimum Bid',
-    'Parcel ID': 'Account Number',  # No exact match, but relates to property tracking
-    'Property Address': 'Address',
-    'Assessed Value':'Adjudged Value'
+
+    'Borough': 'County',
+    'Block ': 'Block ',
+    'Lot': 'Lot',
+    'Tax Class Code': 'Class Code',
+    'Building Class': 'Property Type',
+    'Community Board': 'Community Board',
+    'Council District': 'Council District',
+    'House Number': 'House Number',
+    'Street Name': 'Street Name',
+    'Zip Code': 'Zip Code',
+    'Water Debt Only': 'Water Debt Only',
+    'Full Address': 'Address',
+
 }
 
+import pytz
+
+# The datetime for "03/26/2025 09:00 AM ET"
+et_tz = pytz.timezone('US/Eastern')
+auction_start = datetime.strptime("05/20/2025 09:00 AM", "%m/%d/%Y %I:%M %p")
+
+
+print(auction_start)
 
 county_level_data = {
-    "Auction Start": datetime(2025, 5, 20, 00, 00)
+    "Auction Start": auction_start
 }
 
 

@@ -1,0 +1,12 @@
+services:
+  redis:
+    image: redis
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+
+  redis-commander:
+    image: rediscommander/redis-commander
+    ports:
+      - "${RC_PORT}:${RC_PORT}"
+    environment:
+      - REDIS_HOSTS=local:redis:${REDIS_PORT}
