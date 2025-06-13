@@ -102,3 +102,6 @@ def upload_coordinates_to_firestore(scraped_data):
 
 # print(state_data)
 upload_coordinates_to_firestore(state_data)
+
+
+# fix for new york
