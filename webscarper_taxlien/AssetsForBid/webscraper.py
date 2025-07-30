@@ -108,20 +108,35 @@ import pandas as pd
 from selenium.webdriver.support.wait import WebDriverWait
 
 
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
 import selenium
 
+#
+# driver_path = r"C:\Users\shira\Downloads\chromedriver-win64 (3)\chromedriver-win64\chromedriver.exe"
+from selenium.webdriver.chrome.service import Service
 
-driver_path = r"C:\Users\shira\Downloads\chromedriver-win64 (3)\chromedriver-win64\chromedriver.exe"
+driver_path = ChromeDriverManager().install()
 service = Service(driver_path)
 
 options = webdriver.ChromeOptions()
 options.add_argument("--enable-logging")
-options.add_argument("--disable-redirects")
 options.add_argument("--blink-settings=imagesEnabled=false")
-# options.add_argument("--headless")  # Run in headless mode (without UI)
-options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
+# options.add_argument("--headless=new")
+options.add_argument(
+    "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.6422.141 Safari/537.36"
+)
 
-options.add_argument("--v=1")  # Increase verbosity
+# optionally ignore cert errors:
+# options.add_argument("--ignore-certificate-errors")
+
+# driver = webdriver.Chrome(service=service, options=options)
+
+# driver.get("https://www.bid4assets.com/storefront/CalaverasJan25")
+
+
+
 
 driver = webdriver.Chrome(service=service, options=options)
 
@@ -159,17 +174,22 @@ print(f"Found {len(links)} links.")
 # Now iterate over each auction link and perform actions
 for link in links[5:]:
     print(f"Processing: {link}")
+    print(repr(link))
+    print("LINK repr:", repr(link))
+    print(len("https://www.bid4assets.com/storefront/CalaverasJan25"))
+    print("LINK length:", len(link))
+
     driver.get(link)
     time.sleep(3)
-    print(driver.current_url)  # Print the URL after loading the page
-    time.sleep(5)  # wait for a few seconds to see if the URL changes
-    print(driver.current_url)  # Check the URL again
+
 
     # Wait for the content to load and expand the relevant section
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a[href="#collapseFive"]')))
     element = driver.find_element(By.CSS_SELECTOR, 'a[href="#collapseFive"]')
     element.click()
 
+    break
+print("outside")
 
 
 
