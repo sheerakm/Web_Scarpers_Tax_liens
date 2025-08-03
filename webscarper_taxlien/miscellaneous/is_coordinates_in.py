@@ -1,7 +1,7 @@
 # untested code
 
 from geopy.geocoders import Nominatim
-
+from coordinate_checker.offline_checker import is_point_in_county
 
 # for example 'United States'
 

@@ -29,15 +29,6 @@ key_mapping = {
 import pytz
 
 # The datetime for "03/26/2025 09:00 AM ET"
-et_tz = pytz.timezone('US/Eastern')
-auction_start = datetime.strptime("05/20/2025 09:00 AM", "%m/%d/%Y %I:%M %p")
-
-
-print(auction_start)
-
-county_level_data = {
-    "Auction Start": auction_start
-}
 
 
 #     "Auction End": datetime(2025, 4, 22, 19, 0),  # UTC
@@ -62,25 +53,52 @@ db = firestore.client()
 # with open("output.json", "r") as file:
 #     data = json.load(file)
 
+def push_keys_to_firestore(state: str, county: str, key_mapping: dict, Dates: dict):
+    try:
+        # Timezone-aware auction start datetime
+        # et_tz = pytz.timezone('US/Eastern')
+        # auction_start = et_tz.localize(datetime.strptime("05/20/2025 09:00 AM", "%m/%d/%Y %I:%M %p"))
+        #
+        # county_level_data = {
+        #     "Auction Start": auction_start
+        # }
+
+        county_doc_ref = db.collection("States").document(state).collection("Counties").document(county)
+        county_doc_ref.set({"last_updated": datetime.utcnow()}, merge=True)
+
+        county_doc_ref.collection("Dates").add(Dates)
+        county_doc_ref.collection("Keys").add(key_mapping)
+
+        print(f"Successfully pushed data for {county}, {state}")
+    except Exception as e:
+        print(f"Failed to write data: {e}")
 
 
+if __name__ == '__main__':
 
-try:
-    county_doc_ref = db.collection("States").document("New York").collection("Counties").document('Kings')
+    et_tz = pytz.timezone('US/Eastern')
+    auction_start = datetime.strptime("05/20/2025 09:00 AM", "%m/%d/%Y %I:%M %p")
 
+    county_level_data = {
+        "Auction Start": auction_start
+    }
 
-    county_doc_ref.set({"last_updated": datetime.utcnow()}, merge=True)
-
-    subcollection_ref = county_doc_ref.collection("Dates")
-
-
-    subcollection_ref.add(county_level_data)  # Firestore generates a unique ID automatically
-
-    subcollection2_ref = county_doc_ref.collection("Keys")
+    try:
+        county_doc_ref = db.collection("States").document("New York").collection("Counties").document('Kings')
 
 
-    subcollection2_ref.add(key_mapping)  # Firestore generates a unique ID automatically
+        county_doc_ref.set({"last_updated": datetime.utcnow()}, merge=True)
+
+        subcollection_ref = county_doc_ref.collection("Dates")
 
 
-except Exception as e:
-        print(f"Failed to write data")
+        subcollection_ref.add(county_level_data)  # Firestore generates a unique ID automatically
+
+        subcollection2_ref = county_doc_ref.collection("Keys")
+
+
+        subcollection2_ref.add(key_mapping)  # Firestore generates a unique ID automatically
+
+
+    except Exception as e:
+            print(f"Failed to write data")

@@ -10,6 +10,8 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+# from property_search_per_county.California import LosAngeles
+
 # Setup paths
 driver_path = r"..\..\chrome\chromedriver\chromedriver-win64\chromedriver.exe"
 chrome_binary_path = r"..\..\chrome\chrome\chrome-win64\chrome.exe"
@@ -283,9 +285,9 @@ try:
 
     relevant_index = final_data.index(relevant)
 
-    print("\n🗂️ Auction Info:")
-    pprint.pprint(relevant)
-    print("\n🔗 Associated Links:")
+    # print("\n🗂️ Auction Info:")
+    # pprint.pprint(relevant)
+    # print("\n🔗 Associated Links:")
 
     links = {(key, url) for (key, url) in all_links[relevant_index].items() if url}
     links2 = {
@@ -293,11 +295,22 @@ try:
         for key, url in all_links[relevant_index].items()
         if url and ('special' in key.lower() or 'lien' in key.lower())
     }
-    print(links2)
+    # print(links2)
     extract_lien_parcels_from_pdf(links2)
+
+    from meta_keys import convert_date_keys
+    date_info = convert_date_keys(relevant, None)
+
+    from keys import insert_dates
+
+    insert_dates('California', 'Los Angeles', date_info)
 
 
     print(liens, "liens are")
+
+    from add_liens import update_parcels_with_liens
+
+    update_parcels_with_liens('California', 'LosAngeles', liens)
 
 
 finally:
