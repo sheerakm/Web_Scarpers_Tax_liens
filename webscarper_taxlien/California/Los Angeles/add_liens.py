@@ -1,7 +1,16 @@
-from google.cloud import firestore
+import firebase_admin
+from firebase_admin import credentials, firestore
 from datetime import datetime
 
-db = firestore.Client()
+
+def init_firebase():
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("../../private_keys_to_be_ignored/beta-test-40bcf-firebase-adminsdk-c86jz-4448da56cd.json")
+        firebase_admin.initialize_app(cred)
+
+    return firestore.client()
+
+db = init_firebase()
 
 def update_parcels_with_liens(state, county, liens_dict):
     county_doc_ref = db.collection("States").document(state).collection("Counties").document(county)

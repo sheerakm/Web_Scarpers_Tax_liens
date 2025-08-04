@@ -28,11 +28,17 @@ def clear_subcollection(subcollection_ref):
         doc.reference.delete()
 
 # Initialize Firebase
-cred = credentials.Certificate("../../private_keys_to_be_ignored/beta-test-40bcf-firebase-adminsdk-c86jz-4448da56cd.json")
-firebase_admin.initialize_app(cred)
 
-# Access Firestore
-db = firestore.client()
+
+def init_firebase():
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("../../private_keys_to_be_ignored/beta-test-40bcf-firebase-adminsdk-c86jz-4448da56cd.json")
+        firebase_admin.initialize_app(cred)
+
+    return firestore.client()
+
+db = init_firebase()
+
 
 
 def insert_dates(state, county, county_level_data):
