@@ -1,6 +1,6 @@
 
 
-def Texas(ID):
+def Dallas(ID):
     return 'https://www.dallascad.org/AcctDetailRes.aspx?ID=' + str(ID)
 
 
@@ -8,4 +8,4 @@ def Texas(ID):
 
 
 
-print(Texas('00000721951000000'))
+print(Dallas('00000721951000000'))

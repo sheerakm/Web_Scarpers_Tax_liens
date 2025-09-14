@@ -25,15 +25,20 @@ def check_and_link_parcels(state, county):
         data = parcel_doc.to_dict()
 
 
-        if "link_to_profile" in data:
-            continue
+        # if "link_to_profile" in data:
+        #     continue
+
+
 
         profile_link = LosAngeles(data['Account Number'])
         # print(profile_link)
         # continue
 
         # Update doc with new key
-        parcel_ref.update({"linked_to_profile": profile_link})
+        parcel_ref.set({
+            "linked_to_profile": profile_link,
+            "Sale Type": "Deed"
+        }, merge=True)
 
 
 check_and_link_parcels('California', 'Los Angeles')
