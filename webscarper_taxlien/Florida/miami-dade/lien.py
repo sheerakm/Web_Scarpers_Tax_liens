@@ -1,41 +1,44 @@
 
 key_mapping = {
-    'linked_to_profile': 'linked_to_profile',  # No exact match, needs manual handling
-    'Auction Type': 'Sale Type',
-    'Case #': 'Cause Number',
-    'Certificate #': 'Writ Number',  # No exact match, but can be tracked
-    'Opening Bid': 'Est. Minimum Bid',
-    'Parcel ID': 'Account Number',  # No exact match, but relates to property tracking
-    'Property Address': 'Address',
-    'Assessed Value':'Adjudged Value'
+  "linked_to_profile": "linked_to_profile",
+  "Auction Type": "Auction_Type",
+  "Opening Bid": "Est. Minimum Bid",
+  "Parcel ID": "Account Number  ",
+  "Property Address": "Address",
+  "Assessed Value": "Adjudged Value",
 }
-
 
 
 import traceback
 import json
 import time
+
 from selenium import webdriver
-from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+
+# Configuration for the WebDriver
+driver_path = r"..\..\chrome\chromedriver\chromedriver-win64\chromedriver.exe"
+chrome_binary_path = r"..\..\chrome\chrome\chrome-win64\chrome.exe"
+
+service = Service(driver_path)
+options = webdriver.ChromeOptions()
+options.binary_location = chrome_binary_path
+options.add_argument("--enable-logging")
+options.add_argument("--v=1")
+
+driver = webdriver.Chrome(service=service, options=options)
+wait = WebDriverWait(driver, 30)  # Increased timeout for more stability
 
 from miscellaneous.writing_to_firebase import write_parcels_to_firebase
 
 driver_path = r"C:\Users\shira\Downloads\chromedriver-win64 (3)\chromedriver-win64\chromedriver.exe"
-service = Service(driver_path)
 
-options = webdriver.ChromeOptions()
-options.add_argument("--enable-logging")
-options.add_argument("--v=1")  # Increase verbosity
 
-driver = webdriver.Chrome(service=service, options=options)
-
-wait = WebDriverWait(driver, 10)
-
-url = r'https://www.miamidade.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/03/2025'
+url = r'https://www.miamidade.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/09/2025'
 driver.get(url)
 
 time.sleep(10)  # Allow the page to load completely

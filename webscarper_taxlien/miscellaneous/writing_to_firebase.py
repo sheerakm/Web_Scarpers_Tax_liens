@@ -46,7 +46,8 @@ def write_parcels_to_firebase(data, keys, state, county):
     for index, parcel in enumerate(data):
         new_parcel = {}
         for key, value in parcel.items():
-            new_parcel[keys[key]] = value
+            if key in keys:
+                new_parcel[keys[key]] = value
 
         new_parcel['County'] = county
 
@@ -61,7 +62,7 @@ def write_parcels_to_firebase(data, keys, state, county):
             return cleaned_address
 
 
-        cleaned_address = clean_address(new_parcel['Address'])
+        cleaned_address = clean_address(new_parcel['Address']) + ', ' + county + ', ' + state
 
         try:
             x, y = convert_location_to_x_y(cleaned_address)
@@ -74,6 +75,10 @@ def write_parcels_to_firebase(data, keys, state, county):
         #     else:
         #         print(x, y, "detected")
         #         x, y = None, None
+        from miscellaneous.coordinate_checker.offline_checker import is_point_in_county
+        if x and y and is_point_in_county(x, y, county, state) is False:
+            print("not in county", index)
+            x, y = None, None
         new_parcel['latitude'] = x
         new_parcel['longitude'] = y
         time.sleep(1.001)
